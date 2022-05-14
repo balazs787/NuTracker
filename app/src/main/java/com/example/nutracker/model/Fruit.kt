@@ -1,6 +1,11 @@
 package com.example.nutracker.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Fruit(
+    @PrimaryKey(autoGenerate = true)
     val id: Long,
     val genus: String,
     val name: String,
