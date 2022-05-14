@@ -1,0 +1,150 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Fruits API"
+host: "www.fruityvice.com"
+basePath: "/api/"
+tags:
+- name: "Fruits"
+  description: ""
+schemes:
+- "https"
+- "http"
+paths:
+  /fruit/all:
+    get:
+      tags:
+      - "Fruits"
+      summary: "Gets all fruits from the server"
+      description: ""
+      operationId: "Get All Fruits"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Fruit'
+    post:
+      tags:
+      - "Fruits"
+      summary: "Create fruit"
+      description: ""
+      operationId: "Create fruit"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Fruit to create"
+        required: true
+        schema:
+          $ref: '#/definitions/Fruit'
+      responses:
+        "201":
+          description: OK
+  /fruit/{name}:
+    get:
+      tags:
+      - "Fruits"
+      summary: "Get fruit"
+      description: ""
+      operationId: "Get fruit"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Name of fruit"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+              $ref: '#/definitions/Fruit'
+        "404":
+          description: "Not found"
+    put:
+      tags:
+      - "Fruits"
+      summary: "Update fruit"
+      description: ""
+      operationId: "Update fruit"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Name of fruit"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        description: "Fruit to put"
+        required: true
+        schema:
+          $ref: '#/definitions/Fruit'
+      responses:
+        "204":
+          description: "OK"
+    delete:
+      tags:
+      - "Fruits"
+      summary: "Delete fruit"
+      description: ""
+      operationId: "Delete fruit"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Name of fruit"
+        required: true
+        type: "string"
+      responses:
+        "204":
+          description: "OK"
+definitions:
+  Fruit:
+    type: "object"
+    properties:
+      genus:
+        type: "string"
+      name:
+        type: "string"
+      id:
+        type: "number"
+      family:
+        type: "string"
+      order:
+        type: "string"
+      nutritions:
+        type: "array"
+        items:
+          $ref: '#/definitions/Nutritions'
+  Nutritions:
+    type: "object"
+    properties:
+      carbohydrates:
+        type: "number"
+      protein:
+        type: "number"
+      fat:
+        type: "number"
+      calories:
+        type: "number"
+      sugar:
+        type: "number"
