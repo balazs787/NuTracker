@@ -2,6 +2,7 @@ package com.example.nutracker.di
 
 import android.app.Application
 import androidx.room.Room
+import com.example.nutracker.NutrackerApp
 import com.example.nutracker.R
 import com.example.nutracker.persistence.AppDatabase
 import com.example.nutracker.persistence.NutrackerDao
@@ -23,6 +24,7 @@ object PersistenceModule {
                 AppDatabase::class.java,
                 "app_database"
             )
+            .fallbackToDestructiveMigration()
             .build()
     }
 
