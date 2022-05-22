@@ -47,8 +47,8 @@ class MainViewModel @Inject constructor(
         println(selectedFruit.toString());
     }
 
-    fun delete(fruit: Fruit){
-        mainRepository.delete(fruit);
+    fun deleteClicked(){
+        //mainRepository.delete(fruit);
     }
 
     fun backClicked(){
@@ -66,7 +66,7 @@ class MainViewModel @Inject constructor(
 
     fun saveClicked(){
         mainRepository.add(_selectedFruit.value);
-        _title.value = "Save";
+        _title.value = "Fruit";
         _details.value = false;
         _selectedTab.value = 0;
     }

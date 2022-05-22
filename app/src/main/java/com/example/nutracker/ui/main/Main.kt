@@ -32,13 +32,13 @@ fun Main(viewModel: MainViewModel) {
     val fruits by viewModel.fruitList.collectAsState(initial = listOf())
 
     ProvideWindowInsets {
-        NavHost(navController = navController, startDestination = NavScreen.Home.route) {
+        NavHost(navController = navController, startDestination = NavScreen.Home.route, ) {
             composable(NavScreen.Home.route) {
                 ConstraintLayout {
                     val (body, progress) = createRefs()
                     Scaffold(
                         floatingActionButton = {
-                            FloatingActionButton(onClick = { viewModel.addClicked() }) {
+                            FloatingActionButton(onClick = { viewModel.addClicked() }, Modifier.visible(!viewModel.details.value), backgroundColor = Color.Red) {
                                 Icon(
                                     Icons.Filled.Add,
                                     contentDescription = "AddButton",
@@ -50,7 +50,8 @@ fun Main(viewModel: MainViewModel) {
                         topBar = { Header(viewModel.title.value,
                             viewModel.details.value,
                             { _ -> viewModel.backClicked()},
-                            { _ -> viewModel.saveClicked()}) },
+                            { _ -> viewModel.saveClicked()},
+                            { _ -> viewModel.deleteClicked()}) },
                         modifier = Modifier.constrainAs(body) {
                             top.linkTo(parent.top)
                         }
@@ -83,7 +84,8 @@ fun Main(viewModel: MainViewModel) {
 private fun Header(name : String,
                    details : Boolean,
                    onBackClicked: (any : Any?) -> Unit,
-                   onSaveClicked: (any : Any?) -> Unit) {
+                   onSaveClicked: (any : Any?) -> Unit,
+                   onDeleteClicked: (any : Any?) -> Unit) {
     if(!details){
 
         TopAppBar(
@@ -153,10 +155,6 @@ private fun Header(name : String,
                         modifier = Modifier.size(ButtonDefaults.IconSize))
                 }
             }
-
-
-
-
         }
     }
 
