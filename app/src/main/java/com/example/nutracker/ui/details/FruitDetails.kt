@@ -1,7 +1,7 @@
 package com.example.nutracker.ui.details
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Divider
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -16,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import com.example.nutracker.model.Fruit
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun FruitDetails (modifier: Modifier = Modifier, fruit: Fruit){
@@ -69,6 +71,7 @@ fun FruitDetails (modifier: Modifier = Modifier, fruit: Fruit){
             TextField(
                 modifier = Modifier
                     .padding(2.dp),
+                placeholder = { Text(text = "family") },
                 value = family ?: "",
                 onValueChange = {
                     family = it
@@ -92,6 +95,7 @@ fun FruitDetails (modifier: Modifier = Modifier, fruit: Fruit){
             TextField(
                 modifier = Modifier
                     .padding(2.dp),
+                placeholder = { Text(text = "genus") },
                 value = genus ?: "",
                 onValueChange = {
                     genus = it
@@ -115,6 +119,7 @@ fun FruitDetails (modifier: Modifier = Modifier, fruit: Fruit){
             TextField(
                 modifier = Modifier
                     .padding(2.dp),
+                placeholder = { Text(text = "order") },
                 value = order ?: "",
                 onValueChange = {
                     order = it
@@ -138,9 +143,11 @@ fun FruitDetails (modifier: Modifier = Modifier, fruit: Fruit){
             TextField(
                 modifier = Modifier
                     .padding(2.dp),
-                value = calories.toString() ?: "",
+                placeholder = { Text(text = "0.0") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                value = if(calories==null){ "0.0" } else{ calories.toString() },
                 onValueChange = {
-                    calories = 0f
+                    calories = it.toFloat()
                 },
             )
         }
@@ -161,9 +168,11 @@ fun FruitDetails (modifier: Modifier = Modifier, fruit: Fruit){
             TextField(
                 modifier = Modifier
                     .padding(2.dp),
-                value = carbohydrates.toString() ?: "",
+                placeholder = { Text(text = "0.0") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                value = if(carbohydrates==null){ "0.0" } else{ carbohydrates.toString() },
                 onValueChange = {
-                    carbohydrates = 0f
+                    carbohydrates = it.toFloat()
                 },
             )
         }
@@ -184,9 +193,11 @@ fun FruitDetails (modifier: Modifier = Modifier, fruit: Fruit){
             TextField(
                 modifier = Modifier
                     .padding(2.dp),
-                value = protein.toString() ?: "",
+                placeholder = { Text(text = "0.0") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                value = if(protein==null){ "0.0" } else{ protein.toString() },
                 onValueChange = {
-                    protein = 0f
+                    protein = it.toFloat()
                 },
             )
         }
@@ -207,9 +218,11 @@ fun FruitDetails (modifier: Modifier = Modifier, fruit: Fruit){
             TextField(
                 modifier = Modifier
                     .padding(2.dp),
-                value = fat.toString() ?: "",
+                placeholder = { Text(text = "0.0") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                value = if(fat==null){ "0.0" } else{ fat.toString() },
                 onValueChange = {
-                    fat = 0f
+                    fat = it.toFloat()
                 },
             )
         }
