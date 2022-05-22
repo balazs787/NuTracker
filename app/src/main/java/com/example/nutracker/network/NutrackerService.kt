@@ -4,20 +4,21 @@ import com.example.nutracker.model.Fruit
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
+import com.skydoves.sandwich.ApiResponse
 
 interface NutrackerService {
-    @GET("fruits/all")
+    @GET("fruit/all")
     fun getFruits(): Call<List<Fruit>>
 
-    @GET("fruits/{name}")
-    fun getFruit(@Path("name") name : String?): Call<ResponseBody>
+    @GET("fruit/{name}")
+    fun getFruit(@Path("name") name : String?): ApiResponse<ResponseBody>
 
-    @PUT("fruits/{name}")
-    fun updateFruit(@Path("name") name: String?, @Body fruit: Fruit): Call<ResponseBody>
+    @PUT("fruit/{name}")
+    fun updateFruit(@Path("name") name: String?, @Body fruit: Fruit): ApiResponse<ResponseBody>
 
-    @POST("fruits")
-    fun createFruit(@Body fruit: Fruit): Call<ResponseBody>
+    @POST("fruit")
+    fun createFruit(@Body fruit: Fruit): ApiResponse<ResponseBody>
 
-    @DELETE("fruits/{name}")
-    fun deleteFruit(@Path("name") name: String?): Call<ResponseBody>
+    @DELETE("fruit/{name}")
+    fun deleteFruit(@Path("name") name: String?): ApiResponse<ResponseBody>
 }

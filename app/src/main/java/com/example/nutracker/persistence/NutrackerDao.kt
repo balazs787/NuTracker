@@ -19,5 +19,5 @@ interface NutrackerDao {
     fun getFruits(): List<Fruit>
 
     @Query("SELECT * FROM Fruit WHERE name = :name")
-    fun findById(name: String): Fruit?
+    fun findByName(name: String): Fruit?
 }

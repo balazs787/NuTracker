@@ -1,7 +1,11 @@
 package com.example.nutracker.di
 
 import android.content.Context
+import com.example.nutracker.extensions.FruitSerialize
+import com.example.nutracker.model.Fruit
 import com.example.nutracker.network.NutrackerService
+import com.google.gson.GsonBuilder
+import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +18,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+object NetworkModule {
+
+    val json = GsonBuilder().registerTypeAdapter(Fruit::class.java,FruitSerialize()).create()
+
 
     @Provides
     @Singleton
@@ -31,7 +38,8 @@ class NetworkModule {
             .baseUrl(
                 NetworkConfig.SERVICE_ENDPOINT
             )
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(json))
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .build()
     }
 
