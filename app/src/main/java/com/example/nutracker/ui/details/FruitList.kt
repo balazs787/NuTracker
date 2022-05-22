@@ -13,7 +13,7 @@ import com.example.nutracker.model.Fruit
 fun FruitList (
     modifier: Modifier = Modifier,
     fruits: List<Fruit>,
-    onNameClicked: (fruit: Fruit) -> Unit,
+    onItemClicked: (fruit: Fruit) -> Unit,
 ){
 
     LazyColumn {
@@ -21,8 +21,8 @@ fun FruitList (
             Column(horizontalAlignment = Alignment.Start,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(2.dp)) {
-                FruitItem(modifier, fruit, onNameClicked)
+                    .padding(1.dp)) {
+                FruitItem(modifier, fruit, onItemClicked)
             }
         }
     }

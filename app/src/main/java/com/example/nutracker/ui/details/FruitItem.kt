@@ -9,15 +9,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.nutracker.model.Fruit
-import com.example.nutracker.ui.theme.Blue600
-import com.example.nutracker.ui.theme.Green700
 
 
 @Composable
-fun FruitItem (modifier: Modifier = Modifier, fruit: Fruit, onNameClicked: (fruit: Fruit) -> Unit){
+fun FruitItem (modifier: Modifier = Modifier, fruit: Fruit, onItemClicked: (fruit: Fruit) -> Unit){
 
     val gradient = Brush.horizontalGradient(listOf(Color(0xFF0077C7), Color(0xFF9AFA00)))
 
@@ -27,7 +24,7 @@ fun FruitItem (modifier: Modifier = Modifier, fruit: Fruit, onNameClicked: (frui
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 8.dp),
-        onClick = { onNameClicked(fruit) }
+        onClick = { onItemClicked(fruit) }
     )
 }
 
