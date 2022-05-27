@@ -31,6 +31,7 @@ fun Main(viewModel: MainViewModel) {
     val selectedTab = Tabs.getTabFromResource(viewModel.selectedTab.value)
     val fruits by viewModel.fruitList.collectAsState(initial = listOf())
 
+
     ProvideWindowInsets {
         NavHost(navController = navController, startDestination = NavScreen.Home.route, ) {
             composable(NavScreen.Home.route) {

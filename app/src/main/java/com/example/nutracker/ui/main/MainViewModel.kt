@@ -1,5 +1,6 @@
 package com.example.nutracker.ui.main
 
+import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -7,6 +8,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.nutracker.model.Fruit
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -32,6 +36,7 @@ class MainViewModel @Inject constructor(
     private val _title: MutableState<String> = mutableStateOf("Fruits")
     val title: State<String> get() = _title
 
+    private val firebaseAnalytics = Firebase.analytics;
 
     val fruitList: Flow<List<Fruit>?> =
         mainRepository.loadFruits(
@@ -44,11 +49,19 @@ class MainViewModel @Inject constructor(
         _selectedFruit.value = fruit;
         _title?.value = fruit?.name?:"";
         _details.value = true;
-        println(selectedFruit.toString());
+
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "selectFruit")
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Select fruit and show details: ${_selectedFruit.value.name}")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, bundle)
     }
 
     fun deleteClicked(){
         //mainRepository.delete(fruit);
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "deleteFruit")
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Delete fruit: ${_selectedFruit.value.name}")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.REMOVE_FROM_CART, bundle)
     }
 
     fun backClicked(){
@@ -69,6 +82,11 @@ class MainViewModel @Inject constructor(
         _title.value = "Fruit";
         _details.value = false;
         _selectedTab.value = 0;
+
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "saveFruit")
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Save fruit to list: ${_selectedFruit.value.name}")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.ADD_TO_CART, bundle)
     }
 
 
