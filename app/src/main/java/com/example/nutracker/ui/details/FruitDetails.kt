@@ -2,9 +2,7 @@ package com.example.nutracker.ui.details
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -29,6 +27,7 @@ fun FruitDetails (modifier: Modifier = Modifier, fruit: Fruit){
     var carbohydrates by rememberSaveable { mutableStateOf(fruit?.carbohydrates) }
     var protein by rememberSaveable { mutableStateOf(fruit?.protein) }
     var fat by rememberSaveable { mutableStateOf(fruit?.fat) }
+
 
     Column(horizontalAlignment = Alignment.Start){
         Row (
@@ -225,6 +224,18 @@ fun FruitDetails (modifier: Modifier = Modifier, fruit: Fruit){
                     fat = it.toFloat()
                 },
             )
+        }
+        Row (
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+        ){
+            Button(
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red),
+                onClick = { throw RuntimeException("Test Crash") }){
+                Text("Test Crash");
+            }
         }
     }
 }
